@@ -1,0 +1,62 @@
+# Laravel specific files and directories
+
+/vendor
+/node_modules
+/public/hot
+/public/storage
+/storage/*.key
+/.idea
+/.vscode
+/.env
+/.env.*
+/.phpunit.result.cache
+Homestead.json
+Homestead.yaml
+npm-debug.log
+yarn-error.log
+/.sass-cache
+
+# Ignore IDE and editor-specific directories
+/.phpstorm.meta.php
+/.phpunit.result.cache
+/.vscode/
+/.idea/
+
+# Ignore OS-specific files
+.DS_Store
+Thumbs.db
+
+# Ignore environment and sensitive files
+.env
+.env.*
+.env.backup
+.env.local
+.env.development
+.env.production
+.env.testing
+
+# Ignore deployment scripts and logs
+/deploy.log
+/deploy.sh
+
+# Ignore Laravel logs and caches
+/storage/logs
+/storage/framework/sessions
+/storage/framework/views
+/storage/framework/cache
+
+# Ignore compiled classes and generated files
+/.phpunit.result.cache
+/vendor/
+/node_modules/
+
+# Ignore MySQL database data directory
+/storage/*.sql
+/._*
+
+# Ignore miscellaneous
+/public/build
+/public/mix-manifest.json
+
+# Ignore the Laravel Mix manifest file
+/mix-manifest.json
