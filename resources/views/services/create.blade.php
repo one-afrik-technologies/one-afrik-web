@@ -1,9 +1,9 @@
-<!-- resources/views/projects/create.blade.php -->
+<!-- resources/views/services/create.blade.php -->
 @extends('layouts.app')
 
 @section('content')
-    <h1>Create Project</h1>
-    <form action="{{ route('projects.store') }}" method="POST">
+    <h1>Create Service</h1>
+    <form action="{{ route('services.store') }}" method="POST">
         @csrf
         <label for="name">Name:</label>
         <input type="text" id="name" name="name" required>
@@ -11,17 +11,11 @@
         <label for="description">Description:</label>
         <textarea id="description" name="description" required></textarea>
         
-        <label for="start_date">Start Date:</label>
-        <input type="date" id="start_date" name="start_date">
+        <label for="price">Price:</label>
+        <input type="text" id="price" name="price">
         
-        <label for="end_date">End Date:</label>
-        <input type="date" id="end_date" name="end_date">
-        
-        <label for="status">Status:</label>
-        <input type="text" id="status" name="status">
-        
-        <label for="url">Project URL:</label>
-        <input type="url" id="url" name="url">
+        <label for="icon">Icon:</label>
+        <input type="text" id="icon" name="icon">
         
         <button type="submit">Create</button>
     </form>
