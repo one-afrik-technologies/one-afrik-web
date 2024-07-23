@@ -9,7 +9,6 @@
     @vite('resources/css/app.css')
 </head>
 <body>
-<<<<<<< HEAD
     
 <nav>
     <div class="nav__header">
@@ -43,21 +42,5 @@
         navLinks.classList.toggle('open');
     });
 </script>
-=======
-    <header>
-        <h1>One Afrik Technology</h1>
-        <nav>
-            <a href="{{ route('home') }}">Home</a>
-            <a href="{{ route('about') }}">About Us</a>
-            <a href="{{ route('services.index') }}">Services</a>
-            <a href="{{ route('projects.index') }}">Projects</a>
-            <a href="{{ route('contacts.index') }}">Contact</a>
-        </nav>
-    </header>
-    <main>
-        @yield('content')
-    </main>
-    @include('layouts.footer')
->>>>>>> d59cf69eb995ae70b7ae6f5f88a8a63693681dc9
 </body>
 </html>
