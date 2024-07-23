@@ -16,7 +16,8 @@ Route::view('/about', 'about')->name('about');
 Route::resource('contacts', ContactController::class);
 
 // Projects routes
-Route::get('/projects', [ProjectController::class, 'index'])->name('projects');
+Route::resource('projects', ProjectController::class);
 
 // Services routes
-Route::get('/services', [ServiceController::class, 'index'])->name('services');
+Route::resource('services', ServiceController::class);
+

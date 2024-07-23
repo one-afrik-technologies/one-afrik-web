@@ -13,15 +13,17 @@
         <nav>
             <a href="{{ route('home') }}">Home</a>
             <a href="{{ route('about') }}">About Us</a>
-            <a href="{{ route('services') }}">Services</a>
-            <a href="{{ route('projects') }}">Projects</a>
+            <a href="{{ route('services.index') }}">Services</a>
+            <a href="{{ route('projects.index') }}">Projects</a>
             <a href="{{ route('contacts.index') }}">Contact</a>
         </nav>
     </header>
     <main>
         @yield('content')
     </main>
-    @include('layouts.footer')
+    <footer>
+        <p>&copy; {{ date('Y') }} One Afrik Technology. All rights reserved.</p>
+    </footer>
 </body>
 </html>
 
