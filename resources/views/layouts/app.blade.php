@@ -21,9 +21,7 @@
     <main>
         @yield('content')
     </main>
-    <footer>
-        <p>&copy; {{ date('Y') }} One Afrik Technology. All rights reserved.</p>
-    </footer>
+    @include('layouts.footer')
 </body>
 </html>
 
