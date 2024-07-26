@@ -1,0 +1,68 @@
+name: Deploy Laravel Application
+
+on:
+  push:
+    branches:
+      - main  # or the branch you want to deploy from
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up SSH
+      uses: webfactory/ssh-agent@v0.5.3
+      with:
+        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+    - name: Parse DB Credentials
+      id: parse_db_credentials
+      run: |
+        echo "${{ secrets.DATABASE }}" > db_credentials.json
+        DB_CONNECTION=$(jq -r '.DB_CONNECTION' db_credentials.json)
+        DB_HOST=$(jq -r '.DB_HOST' db_credentials.json)
+        DB_PORT=$(jq -r '.DB_PORT' db_credentials.json)
+        DB_DATABASE=$(jq -r '.DB_DATABASE' db_credentials.json)
+        DB_USERNAME=$(jq -r '.DB_USERNAME' db_credentials.json)
+        DB_PASSWORD=$(jq -r '.DB_PASSWORD' db_credentials.json)
+        echo "DB_CONNECTION=$DB_CONNECTION" >> $GITHUB_ENV
+        echo "DB_HOST=$DB_HOST" >> $GITHUB_ENV
+        echo "DB_PORT=$DB_PORT" >> $GITHUB_ENV
+        echo "DB_DATABASE=$DB_DATABASE" >> $GITHUB_ENV
+        echo "DB_USERNAME=$DB_USERNAME" >> $GITHUB_ENV
+        echo "DB_PASSWORD=$DB_PASSWORD" >> $GITHUB_ENV
+
+    - name: Deploy to Server
+      env:
+        DB_CONNECTION: ${{ env.DB_CONNECTION }}
+        DB_HOST: ${{ env.DB_HOST }}
+        DB_PORT: ${{ env.DB_PORT }}
+        DB_DATABASE: ${{ env.DB_DATABASE }}
+        DB_USERNAME: ${{ env.DB_USERNAME }}
+        DB_PASSWORD: ${{ env.DB_PASSWORD }}
+      run: |
+        ssh -o StrictHostKeyChecking=no ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_IP }} << 'EOF'
+          cd /path/to/your/project
+          git pull origin main
+          composer install --no-interaction --prefer-dist --optimize-autoloader
+
+          # Set up environment variables
+          echo "DB_CONNECTION=$DB_CONNECTION" >> .env
+          echo "DB_HOST=$DB_HOST" >> .env
+          echo "DB_PORT=$DB_PORT" >> .env
+          echo "DB_DATABASE=$DB_DATABASE" >> .env
+          echo "DB_USERNAME=$DB_USERNAME" >> .env
+          echo "DB_PASSWORD=$DB_PASSWORD" >> .env
+
+          php artisan migrate --force
+          php artisan config:cache
+          php artisan route:cache
+          php artisan view:cache
+          
+          # Restart services if necessary (e.g., Apache, Nginx, PHP-FPM)
+          sudo systemctl restart nginx
+          sudo systemctl restart php7.4-fpm
+        EOF
