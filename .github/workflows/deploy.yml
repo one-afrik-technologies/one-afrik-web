@@ -47,7 +47,21 @@ jobs:
         ssh -o StrictHostKeyChecking=no ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_IP }} << 'EOF'
           cd /path/to/your/project
           git pull origin main
-          composer install --no-interaction --prefer-dist --optimize-autoloader
+
+          # Check if composer is installed
+          if ! command -v composer &> /dev/null
+          then
+              echo "Composer could not be found"
+              exit 1
+          fi
+
+          # Install dependencies
+          composer install --no-interaction --prefer-dist --optimize-autoloader || {
+              echo "Composer install failed. Diagnosing..."
+              composer diagnose
+              composer clear-cache
+              exit 1
+          }
 
           # Set up environment variables
           echo "DB_CONNECTION=${DB_CONNECTION}" >> .env
