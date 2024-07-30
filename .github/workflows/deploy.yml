@@ -16,7 +16,7 @@ jobs:
     - name: Set up SSH
       uses: webfactory/ssh-agent@v0.5.3
       with:
-        ssh-private-key: ${{ secrets.DATABASE}}
+        ssh-private-key: ${{ secrets.KEY }}
 
     - name: Parse DB Credentials
       id: parse_db_credentials
@@ -50,19 +50,15 @@ jobs:
           composer install --no-interaction --prefer-dist --optimize-autoloader
 
           # Set up environment variables
-          echo "DB_CONNECTION=$DB_CONNECTION" >> .env
-          echo "DB_HOST=$DB_HOST" >> .env
-          echo "DB_PORT=$DB_PORT" >> .env
-          echo "DB_DATABASE=$DB_DATABASE" >> .env
-          echo "DB_USERNAME=$DB_USERNAME" >> .env
-          echo "DB_PASSWORD=$DB_PASSWORD" >> .env
+          echo "DB_CONNECTION=${DB_CONNECTION}" >> .env
+          echo "DB_HOST=${DB_HOST}" >> .env
+          echo "DB_PORT=${DB_PORT}" >> .env
+          echo "DB_DATABASE=${DB_DATABASE}" >> .env
+          echo "DB_USERNAME=${DB_USERNAME}" >> .env
+          echo "DB_PASSWORD=${DB_PASSWORD}" >> .env
 
           php artisan migrate --force
           php artisan config:cache
           php artisan route:cache
           php artisan view:cache
-          
-          # Restart services if necessary (e.g., Apache, Nginx, PHP-FPM)
-          sudo systemctl restart nginx
-          sudo systemctl restart php7.4-fpm
         EOF
