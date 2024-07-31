@@ -13,11 +13,13 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::view('/about', 'about')->name('about');
 
 // Contacts routes
-Route::resource('contacts', ContactController::class);
+Route::get('/contacts', [ContactController::class, 'index'])->name('contacts.index');
+Route::get('/contacts/{id}', [ContactController::class, 'show'])->name('contacts.show');
 
 // Projects routes
-Route::resource('projects', ProjectController::class);
+Route::get('/projects', [ProjectController::class, 'index'])->name('projects.index');
+Route::get('/projects/{id}', [ProjectController::class, 'show'])->name('projects.show');
 
 // Services routes
-Route::resource('services', ServiceController::class);
-
+Route::get('/services', [ServiceController::class, 'index'])->name('services.index');
+Route::get('/services/{id}', [ServiceController::class, 'show'])->name('services.show');
