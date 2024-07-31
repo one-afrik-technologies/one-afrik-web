@@ -6,7 +6,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\AuthController;
-
+use App\Http\Controllers\DashboardController;
 // Home page
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
@@ -31,7 +31,7 @@ Route::post('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // Admin routes
-Route::get('/admin', [HomeController::class, 'admin'])->name('admin')->middleware('admin');
+Route::get('/admin', [DashboardController::class, 'index'])->name('admin')->middleware('admin');
 Route::get('/admin/contacts', [ContactController::class, 'admin'])->name('admin.contacts')->middleware('admin');
 
 // admin projects routes
