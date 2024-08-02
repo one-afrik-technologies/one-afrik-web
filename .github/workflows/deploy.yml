@@ -23,7 +23,4 @@ jobs:
       - name: Deploy to server
         run: |
           ssh user@your-server "cd /path/to/your/app && php artisan migrate --force"
-        env:
-          DB_DATABASE: ${{ secrets.DB_DATABASE }}
-          DB_USERNAME: ${{ secrets.DB_USERNAME }}
-          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+        
