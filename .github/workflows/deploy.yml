@@ -1,78 +1,26 @@
-name: Deploy Laravel Application
+name: Deploy to Production
 
 on:
   push:
     branches:
-      - main  # or the branch you want to deploy from
+      - main
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Set up SSH
-      uses: webfactory/ssh-agent@v0.5.3
-      with:
-        ssh-private-key: ${{ secrets.KEY }}
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
 
-    - name: Parse DB Credentials
-      id: parse_db_credentials
-      run: |
-        echo "${{ secrets.DATABASE }}" > db_credentials.json
-        DB_CONNECTION=$(jq -r '.DB_CONNECTION' db_credentials.json)
-        DB_HOST=$(jq -r '.DB_HOST' db_credentials.json)
-        DB_PORT=$(jq -r '.DB_PORT' db_credentials.json)
-        DB_DATABASE=$(jq -r '.DB_DATABASE' db_credentials.json)
-        DB_USERNAME=$(jq -r '.DB_USERNAME' db_credentials.json)
-        DB_PASSWORD=$(jq -r '.DB_PASSWORD' db_credentials.json)
-        echo "DB_CONNECTION=$DB_CONNECTION" >> $GITHUB_ENV
-        echo "DB_HOST=$DB_HOST" >> $GITHUB_ENV
-        echo "DB_PORT=$DB_PORT" >> $GITHUB_ENV
-        echo "DB_DATABASE=$DB_DATABASE" >> $GITHUB_ENV
-        echo "DB_USERNAME=$DB_USERNAME" >> $GITHUB_ENV
-        echo "DB_PASSWORD=$DB_PASSWORD" >> $GITHUB_ENV
+      - name: Install dependencies
+        run: composer install --no-interaction --prefer-dist
 
-    - name: Deploy to Server
-      env:
-        DB_CONNECTION: ${{ env.DB_CONNECTION }}
-        DB_HOST: ${{ env.DB_HOST }}
-        DB_PORT: ${{ env.DB_PORT }}
-        DB_DATABASE: ${{ env.DB_DATABASE }}
-        DB_USERNAME: ${{ env.DB_USERNAME }}
-        DB_PASSWORD: ${{ env.DB_PASSWORD }}
-      run: |
-        ssh -o StrictHostKeyChecking=no ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_IP }} << 'EOF'
-          cd /path/to/your/project
-          git pull origin main
-
-          # Check if composer is installed
-          if ! command -v composer &> /dev/null
-          then
-              echo "Composer could not be found"
-              exit 1
-          fi
-
-          # Install dependencies
-          composer install --no-interaction --prefer-dist --optimize-autoloader || {
-              echo "Composer install failed. Diagnosing..."
-              composer diagnose
-              composer clear-cache
-              exit 1
-          }
-
-          # Set up environment variables
-          echo "DB_CONNECTION=${DB_CONNECTION}" >> .env
-          echo "DB_HOST=${DB_HOST}" >> .env
-          echo "DB_PORT=${DB_PORT}" >> .env
-          echo "DB_DATABASE=${DB_DATABASE}" >> .env
-          echo "DB_USERNAME=${DB_USERNAME}" >> .env
-          echo "DB_PASSWORD=${DB_PASSWORD}" >> .env
-
-          php artisan migrate --force
-          php artisan config:cache
-          php artisan route:cache
-          php artisan view:cache
-        EOF
+      - name: Deploy to server
+        run: |
+          ssh user@your-server "cd /path/to/your/app && php artisan migrate --force"
+      
