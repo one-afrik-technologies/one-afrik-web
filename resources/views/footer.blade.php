@@ -43,7 +43,7 @@
     <ul>
         <li><a href="#">about us</a></li>
          <li><a href="#">contact us</a></li>
-         <li><a href="#">support</a></li>
+         <li><a hre="#">support</a></li>
           
    </ul>
   </div>
