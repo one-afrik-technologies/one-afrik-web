@@ -8,7 +8,7 @@ use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 // Home page
-Route::get('/', [HomeController::class, 'home'])->name('index');
+Route::get('/', [HomeController::class, 'home'])->name('home');
 
 
 // About Us page
