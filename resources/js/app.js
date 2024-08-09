@@ -7,7 +7,7 @@ const menuBtnIcon = menuBtn.querySelector("i");
 
 menuBtn.addEventListener("click", (e) => {
   navLinks.classList.toggle("open");
-
+ console.log('nav-clicked')
   const isOpen = navLinks.classList.contains("open");
   menuBtnIcon.setAttribute("class", isOpen ? "ri-close-line" : "ri-menu-line");
 });
