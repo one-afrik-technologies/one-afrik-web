@@ -18,6 +18,16 @@ class ProjectController extends Controller
 	}
 
 	/**
+	 * Show All projects in admin panel
+	 */
+	public function admin()
+	{
+		$projects = Project::all();
+
+		return view('projects.admin', compact('projects'));
+	}
+	
+	/**
 	 * Show the form for creating a new resource.
 	 */
 	public function create()

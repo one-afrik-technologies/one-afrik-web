@@ -53,6 +53,16 @@ class ContactController extends Controller
     }
 
     /**
+     * Show All contacts in admin panel
+     */
+    public function admin()
+    {
+        $contacts = Contact::all();
+
+        return view('contacts.admin', compact('contacts'));
+    }
+
+    /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)

@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <title>One Afrik Technologies</title>
     <title>@yield('title', 'One Afrik Web')</title>
     @vite('resources/css/app.css')
@@ -11,7 +12,7 @@
 <body>
     
 <nav>
-    <div class="nav__header">
+    <div class="nav__header" >
         <div class="nav__logo">
             <a href="#">
                 <img src="/logo.png" alt="logo" />
