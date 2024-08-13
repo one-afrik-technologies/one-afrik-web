@@ -38,10 +38,10 @@
 
 @vite('resources/js/app.js')
 <script>
-    document.getElementById('menu-btn').addEventListener('click', function() {
-        var navLinks = document.getElementById('nav-links');
-        navLinks.classList.toggle('open');
-    });
+    // document.getElementById('menu-btn').addEventListener('click', function() {
+    //     var navLinks = document.getElementById('nav-links');
+    //     navLinks.classList.toggle('open');
+    // });
 </script>
 </body>
 </html>
