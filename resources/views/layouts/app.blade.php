@@ -6,7 +6,7 @@
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <title>One Afrik Technologies</title>
-    <title>@yield('title', 'One Afrik Web')</title>
+    <title>@yield('title', 'One Afrik Web Solutions')</title>
     @vite('resources/css/app.css')
 </head>
 <body>
@@ -20,9 +20,10 @@
             </a>
         </div>
         <div class="nav__menu__btn" id="menu-btn">
-            <i class="ri-menu-line"></i>
+            <i class="ri-menu-3-line"></i>
         </div>
     </div>
+    
     <ul class="nav__links" id="nav-links">
         <li><a href="{{ route('home') }}">Home</a></li>
         <li><a href="{{ route('about') }}">About Us</a></li>
