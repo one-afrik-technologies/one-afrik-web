@@ -230,7 +230,7 @@ input[type="email"]:focus {
 
 .card-container {
   display: flex;
-  flex-direction: column;
+  flex-direction:column;
   justify-content: center;
   align-items: center;
   gap: 20px;
@@ -244,6 +244,9 @@ input[type="email"]:focus {
   );
   overflow: hidden;
   padding: 60px 50px 20px;
+}
+.slider {
+  display:flex;
 }
 
 .card {
@@ -327,6 +330,7 @@ input[type="email"]:focus {
   font-weight: 400;
   color: #fff;
   grid-row: 6 / 9;
+  text-align: center;
 }
 
 .btn-grad {

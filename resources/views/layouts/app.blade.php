@@ -13,10 +13,11 @@
   <div class="navbar-brand">One African Technologies</div>
   <div class="navbar-collapse">
       <ul class="navbar-nav">
-          <li><a href="#">Home</a></li>
-          <li><a href="#">About</a></li>
-          <li><a href="#">Services</a></li>
-          <li><a href="#">Contact</a></li>
+         <li><a href="{{ route('home') }}">Home</a></li>
+        <li><a href="{{ route('about') }}">About</a></li>
+        <li><a href="{{ route('services.index') }}">Services</a></li>
+        <li><a href="{{ route('projects.index') }}">Projects</a></li>
+        <li><a href="{{ route('contacts.index') }}">Contact</a></li>
       </ul>
       <div class="hamburger" onclick="toggleMenu()">
           <span></span>
@@ -89,6 +90,7 @@
                 <h1>Personalized Guidance</h1>
                 <p>
                   Whether you are a startup or a multinational business we have a solution for you.
+                </p>
                 <button class="btn btn-grad">
                   <span>Learn More</span>
                   <ion-icon name="arrow-forward-outline"></ion-icon>
@@ -151,7 +153,7 @@
                 </button>
               </div>
             </div>
-    
+          </div> 
           <ul class="control" id="custom-control">
             <li>
               <ion-icon name="caret-back-outline"></ion-icon>
