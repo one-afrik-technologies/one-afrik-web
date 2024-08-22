@@ -245,9 +245,7 @@ input[type="email"]:focus {
   overflow: hidden;
   padding: 60px 50px 20px;
 }
-.slider {
-  display:flex;
-}
+
 
 .card {
   max-width: 300px;
@@ -396,9 +394,11 @@ input[type="email"]:focus {
   .btn {
     font-size: 1rem;
   }
+
+
 }
 
-@media (max-width: 1015px) {
+@media (max-width: 1015px) and (min-width:1015){
   .home {
     grid-template-columns: 45% 50%;
     gap: 50px;
@@ -408,6 +408,13 @@ input[type="email"]:focus {
   .btn {
     padding: 8px 12px;
   }
+  .slider {
+  display:flex;
+}
+
+
+
+
 }
 
 @media (max-width: 865px) {
@@ -446,7 +453,11 @@ input[type="email"]:focus {
 
   #form {
     justify-content: center;
+  
   }
+  
+
+
 }
 
 
